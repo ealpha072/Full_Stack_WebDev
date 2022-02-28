@@ -6,16 +6,6 @@ app.use(cors())
 
 app.use(express.json())
 
-/*
-"scripts": {
-    "start": "react-scripts start",
-    "dev": "nodemon index.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json"
-  } */
-
 let notes = [
     {
         "id": 1,
@@ -46,7 +36,7 @@ app.get('/', (request, response) => {
     response.send('<h1>Hello world</h1>')
 })
 
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
     console.log(id);
     const note = notes.find(note => note.id === id)
@@ -58,11 +48,11 @@ app.get('/notes/:id', (request, response) => {
     }
 })
 
-app.get('/notes', (request, response)=>{
+app.get('/api/notes', (request, response)=>{
     response.json(notes)
 })
 
-app.post('/notes', (request, response)=>{
+app.post('/api/notes', (request, response)=>{
     const body = request.body
     if(!body.content){
         response.status(404).json({
@@ -79,7 +69,7 @@ app.post('/notes', (request, response)=>{
     response.json(note)
 })
 
-app.delete('/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
     notes = notes.filter(note => note.id !== id)
 
@@ -89,6 +79,7 @@ app.delete('/notes/:id', (request, response) => {
 const unknownEndpoint = (request, response) => {
     response.status(404).send({error:'Unkown endpoint'})
 }
+
 app.use(unknownEndpoint)
 
 const PORT = process.env.PORT || 3001
