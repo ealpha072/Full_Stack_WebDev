@@ -37,15 +37,18 @@ const App = () => {
 
 	const notesToShow = showAll ? notes : notes.filter(note => note.important)
 
-	const toggleImportanceOf = (id) => {
+	 const toggleImportanceOf = (id) => {
 			const note = notes.find(n => n.id === id)
+			console.log(note);
 			const changedNote = {...note, important:!note.important}
-
-			noteService
-				.update(id, changedNote)
-				.then(returnedNotes=>{
-					setNotes(notes.map(note => note.id !== id ? note : returnedNotes ))
+			console.log(typeof(id));
+			axios.put(`http://localhost:3001/api/notes/${id}`, changedNote).then(response=>{
+				console.log('Sent to server')
 			})
+			/*noteService
+				.update(id, changedNote).then(returnedNotes=>{
+					setNotes(notes.map(note => note.id !== id ? note : returnedNotes ))
+				})*/
 	}
 	return (
 		<div>
