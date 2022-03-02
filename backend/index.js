@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
+//MONGO CREDS
+//username = alpha
+//pass  = eJbF0SW0qNg5tA5U
 app.use(cors())
 
 app.use(express.json())
