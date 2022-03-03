@@ -2,7 +2,7 @@ POST http://localhost:3001/api/notes/
 content-type: application/json
 
 {
-    "name": "sample",
+    "name": "sample note",
     "time": "Wed, 21 Oct 2015 18:27:50 GMT",
     "content": "This has been sent with a contnent attribute"
 }
